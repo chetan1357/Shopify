@@ -1,0 +1,52 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <% if(!currentUser) {%>
+        <a class="navbar-brand" href="/">ShoppingCart</a>
+        <% }else {%>
+        <a class="navbar-brand" href="/products">ShoppingCart</a>
+        <% } %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style='font-size: larger;margin-top: 2px;'>
+            <div class="navbar-nav">
+                <a class="nav-link <%=currentPath === '/products' ? 'active' : ''%>" aria-current="page"
+                    href="/products">Home</a>
+                <a class="nav-link <%=currentPath === '/myCart' ? 'active' : ''%>" href="/myCart">Cart</a>
+                <a class="nav-link <%=currentPath === '/myorders' ? 'active' : ''%>" href="/myorders">MyOrders</a>
+            </div>
+            <div class="navbar-nav ms-auto me-5">
+                <% if(!currentUser) {%>
+                <a class="nav-link <%= currentPath === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                <a class="nav-link <%= currentPath === '/register' ? 'active' : '' %>" href="/register">Sign Up</a>
+                <% } else{ %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        <%= currentUser.username %>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <% if(currentUser && currentUser.username === 'admin') {%>
+                        <li><a class="dropdown-item" href="/products/new">Add Product</a></li>
+                        <% } %>
+                        <% if(currentUser.username !== 'admin') {%>
+                        <li><a class="dropdown-item" href="/myorders">My Orders</a></li>
+                        <li><a class="dropdown-item" href="/previousOrders">Previous Orders</a></li>
+                        <% }else {%>
+                        <li><a class="dropdown-item" href="/allorders">All Orders</a></li>
+                        <% } %>
+                        <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                    </ul>
+                </li>
+                <% } %>
+                <a href="/myCart"><i class="fa fa-shopping-cart ms-3"
+                        style="font-size:27px;color:#f5f5f5;margin-top: 10px;"></i></a>
+                <% if(currentUser) {%>
+                <span class='badge circle' style="margin-left: 3px;"><%=currentUser.cartQuantity%></span>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>

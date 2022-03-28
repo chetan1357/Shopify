@@ -1,0 +1,60 @@
+<header class="jumbotron text-light rounded-0 d-none d-md-block">
+    <div class="container">
+        <div class="jumbotron-text text-center" style="margin-top: 130px;">
+            <% if(noResult !== null) {%>
+            <h2 class="jumbotronText">No results for <span class="font-italic"><%= noResult %></span>, try again. </h2>
+            <% } else{%>
+            <h1 class="display-2 jumbotronText">Welcome to ShoppingCart!</h1>
+            <p class="lead jumbotronText">Explore and buy the best from our site</p>
+            <% } %>
+        </div>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand navbar-light bg-white shadow-sm">
+    <div class="container">
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort By
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <form action="/products" method="GET">
+                            <input type="text" name="sortby" value="rateAvg" class="d-none">
+                            <button type="submit" class="dropdown-item">Highest Rated</button>
+                        </form>
+                        <form action="/products" method="GET">
+                            <input type="text" name="sortby" value="rateCount" class="d-none">
+                            <button type="submit" class="dropdown-item">Most Reviewed</button>
+                        </form>
+                        <form action="/products" method="GET">
+                            <input type="text" name="sortby" value="priceLow" class="d-none">
+                            <button type="submit" class="dropdown-item">Lowest Price</button>
+                        </form>
+                        <form action="/products" method="GET">
+                            <input type="text" name="sortby" value="priceHigh" class="d-none">
+                            <button type="submit" class="dropdown-item">Highest Price</button>
+                        </form>
+                        <div><a href="/products" class="dropdown-item">Reset</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="d-none d-md-block ms-auto">
+            <form action="/products" method="GET" class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="Search Products..."
+                    aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-danger border-0" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</nav>

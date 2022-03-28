@@ -1,0 +1,77 @@
+<% layout('layouts/boilerplate') %>
+
+<h2 style="font-size: 39px;">All Orders : -</h2>
+<div class="card shadow-sm mt-4 bg-success" style="color: #f5f5f5;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3 fw-bold text-center" style="font-size: 20px;">
+                Orders
+            </div>
+            <div class="col-2 fw-bold text-center" style="font-size: 20px;">
+                Customer
+            </div>
+            <div class="col-2 fw-bold text-center" style="font-size: 20px;">
+                Address
+            </div>
+            <div class="col-3 fw-bold text-center" style="font-size: 20px;">
+                Time
+            </div>
+            <div class="col-2 fw-bold text-center" style="font-size: 20px;">
+                Status
+            </div>
+        </div>
+    </div>
+</div>
+
+<% orders.forEach((order , i) => {%>
+<div class="card shadow-sm" style="background-color:#f5f5f5;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3 fw-bold text-center" style="font-size: 20px;color:darkgreen">
+                <%= order._id%>
+                <% order.products.forEach((item) => { %>
+                <div class="fw-lighter" style="color: black;">
+                    <%=item.product.title%> - <%=item.quantity%> pcs
+                </div>
+                <% }) %>
+            </div>
+            <div class="col-2 fw-bold text-center" style="font-size: 20px;">
+                <%= order.user.username%>
+            </div>
+            <div class="col-2 fw-bold text-center" style="font-size: 20px;">
+                <%= order.address%>
+            </div>
+            <div class="col-3 fw-bold text-center" style="font-size: 20px;">
+                <%= moment(order.placedAt).format('hh:mm A') %>
+            </div>
+            <div class="col-2 fw-bold text-center" style="font-size: 20px;">
+                <select class="form-select status-<%=i%>" name="status" id="status">
+                    <option value="Order Placed" <%=order.status == 'Order Placed' ? 'selected' : ''%>>Placed</option>
+                    <option value="Order Confirmed" <%=order.status == 'Order Confirmed' ? 'selected' : ''%>>Confirmed
+                    </option>
+                    <option value="Out for Delivery" <%=order.status == 'Out for Delivery' ? 'selected' : ''%>>Delivered
+                    </option>
+                    <option value="Order Delivered" <%=order.status == 'Order Delivered' ? 'selected' : ''%>>Completed
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<% }) %>
+
+<script>
+    let orderLength = `<%-orders.length%>`;
+
+    const changeOrderStatus = async (i, value) => {
+        await fetch(`/changeOrderStatus?orderId=${i}&status=${value}`);
+    }
+
+    for (let i = 0; i < orderLength; i++) {
+        const status = document.querySelector(`.status-${i}`);
+        status.addEventListener('change', async (event) => {
+            await changeOrderStatus(i, status.value);
+            window.location.reload();
+        })
+    }
+</script>

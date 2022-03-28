@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<div class="container text-center mt-5">
+    <h1 class="text-muted">404 error.</h1>
+    <h1 class="text-muted">
+        <% if (err && err.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><%=err.message%></h4>
+            <p><%=err.stack%></p>
+        </div>
+        <% } else { %>
+        The page you are looking for doesn't exist.
+        <% } %>
+    </h1>
+    <a class="btn btn-danger btn-lg mt-5 rounded-pill" href="/products">Go Home</a>
+</div>

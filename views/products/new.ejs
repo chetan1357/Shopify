@@ -1,0 +1,80 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-sm-12 col-lg-8">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <h1 class="text-center">Add Product</h1>
+                <!-- enctype is used to take multiple files as input  -->
+                <form action="/products" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Product name</label>
+                        <input class="form-control" type="text" name="product[title]" id="title"
+                            placeholder="product name" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a product name.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="price">Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="price-label">$</span>
+                            <input type="text" class="form-control" id="price" placeholder="price" aria-label="price"
+                                aria-describedby="price-label" name="product[price]" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a product price.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="discount">Discount</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="discount-label">%</span>
+                            <input type="text" class="form-control" id="discount" placeholder="discount"
+                                aria-label="discount" aria-describedby="discount-label" name="product[discount]"
+                                required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a Discount percentage.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description</label>
+                        <textarea class="form-control" type="text" name="product[description]" id="description" rows="3"
+                            required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a description of your product.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="image">Images</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" name="image" id="image" multiple required>
+                            <div class="invalid-feedback">
+                                Please upload an image of your product.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 mb-2">
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                </form>
+                <a href="/products">Go Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>

@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<div class="row">
+    <% products.forEach(function(product) { %>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card shadow border-0 mt-4 zoom">
+            <a href="/products/<%=product._id%>"><img class="card-img-top" style="width:100%; height: 300px;"
+                    src="<%=product.images[0].url%>"></a>
+
+            <div class="card-body">
+                <h5 class="card-title text-capitalize">
+                    <a href="/products/<%=product._id%>"><%= product.title %></a>
+                    <small class="text-muted" style="float: right;"><i
+                            class="fas fa-rupee-sign"></i><%= product.price %></small>
+                </h5>
+
+                <div class="card-subtitle">
+                    <% if(!product.reviews.length) {%>
+                    <span class="text-muted">No Reviews</span>
+                    <% }else {%>
+                    <% const stars = ['<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>'] %>
+                    <% for(let i = 0; i < product.ratingAvg; i++) { %>
+                    <% stars[i] = '<i class="fas fa-star text-danger "></i>' %>
+                    <% } %>
+                    <% for(let i = 0; i < stars.length; i++) { %>
+                    <%- stars[i] %>
+                    <% } %>
+                    <span class="text-muted"><%- product.ratingCount %> Review</span>
+                    <% } %>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
