@@ -1,9 +1,5 @@
 # Shopping Cart
 
-![Screenshot from 2022-03-29 11-01-44](https://user-images.githubusercontent.com/91899607/160541047-e4bf28a2-1950-4e33-946a-d4a6651fda9b.png)
-
-![Screenshot from 2022-03-29 11-04-06 (1)](https://user-images.githubusercontent.com/91899607/160541069-83a7bc69-0f4c-4c28-aa7c-eb81b12e1e57.png)
-
 Shopify is a site where a user can buy and review a product. In order to buy or review any product you must have an account.
 
 This project was created using Node.js, Express, Mongoose, MongoDB and Bootstrap.
